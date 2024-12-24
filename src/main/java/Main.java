@@ -8,9 +8,9 @@ public class Main {
 }
 
 class App {
-    int lastId = 0;
-    int wiseSayingSize = 0;
-    WiseSaying[] wiseSayingList = new WiseSaying[5];
+    private int lastId = 0;
+    private int wiseSayingSize = 0;
+    private WiseSaying[] wiseSayingList = new WiseSaying[5];
 
     public void run() {
         Scanner scanner = new Scanner(System.in);
@@ -38,7 +38,8 @@ class App {
                 System.out.println("번호 / 작가 / 명언");
                 System.out.println("----------------------");
                 for (int i = wiseSayingSize - 1; i >= 0; i--) {
-                    System.out.printf("%d / %s / %s\n", wiseSayingList[i].id, wiseSayingList[i].author, wiseSayingList[i].content);
+                    WiseSaying wiseSaying = wiseSayingList[i];
+                    System.out.printf("%d / %s / %s\n", wiseSaying.getId(), wiseSaying.getAuthor(), wiseSaying.getAuthor());
                 }
             }
         }
@@ -51,13 +52,25 @@ class App {
 }
 
 class WiseSaying {
-    int id;
-    String content;
-    String author;
+    private int id;
+    private String content;
+    private String author;
 
     WiseSaying(int id, String content, String author) {
         this.id = id;
         this.content = content;
         this.author = author;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public String getAuthor() {
+        return author;
     }
 }
