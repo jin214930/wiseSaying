@@ -12,7 +12,9 @@ class App {
         Scanner scanner = new Scanner(System.in);
         System.out.println("== 명언 앱 ==");
 
-        int lastIdx = 1;
+        int lastIdx = 0;
+        String[] contentList = new String[3];
+        String[] authorList = new String[3];
 
         while (true) {
             System.out.print("명령) ");
@@ -23,11 +25,16 @@ class App {
                 break;
             } else if (command.equals("등록")) {
                 System.out.print("명언 : ");
-                scanner.nextLine();
+                contentList[lastIdx] = scanner.nextLine();
                 System.out.print("작가 : ");
-                scanner.nextLine();
-                System.out.println(lastIdx + "번 명언이 등록되었습니다.");
-                lastIdx++;
+                authorList[lastIdx] = scanner.nextLine();
+                System.out.printf("%d번 명언이 등록되었습니다.\n", ++lastIdx);
+            } else if (command.equals("목록")) {
+                System.out.println("번호 / 작가 / 명언");
+                System.out.println("----------------------");
+                for (int i = lastIdx - 1; i >= 0; i--) {
+                    System.out.printf("%d / %s / %s\n", i + 1, authorList[i], contentList[i]);
+                }
             }
         }
     }
