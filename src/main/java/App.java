@@ -4,9 +4,10 @@ public class App {
     private int lastId = 0;
     private int wiseSayingSize = 0;
     private final WiseSaying[] wiseSayingList = new WiseSaying[5];
+    private final Scanner scanner = new Scanner(System.in);
+
 
     public void run() {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("== 명언 앱 ==");
 
         // 테스트 데이터
@@ -21,25 +22,33 @@ public class App {
                 System.out.println("명언 앱을 종료합니다.");
                 break;
             } else if (command.equals("등록")) {
-                System.out.print("명언 : ");
-                String content = scanner.nextLine();
-                System.out.print("작가 : ");
-                String author = scanner.nextLine();
-                add(content, author);
-                System.out.printf("%d번 명언이 등록되었습니다.\n", lastId);
+                registerWiseSaying();
             } else if (command.equals("목록")) {
-                System.out.println("번호 / 작가 / 명언");
-                System.out.println("----------------------");
-                for (int i = wiseSayingSize - 1; i >= 0; i--) {
-                    WiseSaying wiseSaying = wiseSayingList[i];
-                    System.out.printf("%d / %s / %s\n", wiseSaying.getId(), wiseSaying.getAuthor(), wiseSaying.getAuthor());
-                }
+                printWiseSayingList();
             }
         }
     }
 
-    public void add(String content, String author) {
+    private void add(String content, String author) {
         WiseSaying wiseSaying = new WiseSaying(++lastId, content, author);
         wiseSayingList[wiseSayingSize++] = wiseSaying;
+    }
+
+    private void registerWiseSaying() {
+        System.out.print("명언 : ");
+        String content = scanner.nextLine();
+        System.out.print("작가 : ");
+        String author = scanner.nextLine();
+        add(content, author);
+        System.out.printf("%d번 명언이 등록되었습니다.\n", lastId);
+    }
+
+    private void printWiseSayingList() {
+        System.out.println("번호 / 작가 / 명언");
+        System.out.println("----------------------");
+        for (int i = wiseSayingSize - 1; i >= 0; i--) {
+            WiseSaying wiseSaying = wiseSayingList[i];
+            System.out.printf("%d / %s / %s\n", wiseSaying.getId(), wiseSaying.getAuthor(), wiseSaying.getAuthor());
+        }
     }
 }
